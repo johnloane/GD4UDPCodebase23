@@ -57,21 +57,9 @@ using std::unordered_set;
 #include "SocketAddress.hpp"
 #include "SocketAddressFactory.hpp"
 #include "UDPSocket.hpp"
-#include "TCPSocket.hpp"
 #include "SocketUtil.hpp"
-#include "Math.hpp"
-#include "ByteSwap.hpp"
-#include "MemoryStream.hpp"
-#include "MemoryBitStream.hpp"
-
-#include "Player.hpp"
-#include "GameObject.hpp"
-#include "ComplexPlayer.hpp"
-#include "LinkingContext.hpp"
 
 
-#include "Client.hpp"
-#include "Server.hpp"
 
 enum class PacketType
 {
