@@ -16,7 +16,9 @@ int main()
 	SocketUtil::StaticInit();
 	UDPSocketPtr client_socket = SocketUtil::CreateUDPSocket(INET);
 	client_socket->SetNonBlockingMode(false);
-	Client::DoServiceLoop(client_socket);
+	//Client::DoServiceLoop(client_socket);
+	Player* john = new Player();
+	Client::SendPlayerOutputByteStream(client_socket, john);
 	return 0;
 }
 
@@ -110,6 +112,16 @@ int Client::ConvertIPToInt(std::string ip_string)
 		ip_int += array_tokens[i] << ((3 - i) * 8);
 	}
 	return ip_int;
+	
+}
+
+void Client::SendPlayerOutputByteStream(UDPSocketPtr client_socket, const Player* player)
+{
+	SocketAddress server_address = SocketAddress(Client::ConvertIPToInt("127.0.0.1"), 50005);
+	OutputMemoryStream output_stream;
+	player->Write(output_stream);
+	int bytes_sent = client_socket->SendTo(output_stream.GetBufferPtr(), output_stream.GetLength(), server_address);
+	std::cout << "Sent: " << bytes_sent << std::endl;
 	
 }
 

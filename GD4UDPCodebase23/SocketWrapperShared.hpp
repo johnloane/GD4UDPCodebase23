@@ -60,6 +60,8 @@ using std::unordered_set;
 #include "UDPSocket.hpp"
 #include "SocketUtil.hpp"
 #include "Player.hpp"
+#include "Math.hpp"
+#include "MemoryStream.hpp"
 
 
 
