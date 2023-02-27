@@ -58,7 +58,7 @@ void Client::GetChoice(std::string& choice)
 
 void Client::SendDataToServer(const UDPSocketPtr client_socket, char* choice)
 {
-	SocketAddress server_address = SocketAddress(Client::ConvertIPToInt("127.0.0.1"), 50005);
+	SocketAddress server_address = SocketAddress(Client::ConvertIPToInt("10.102.212.100"), 50005);
 	int bytes_sent = client_socket->SendTo(choice, sizeof(choice), server_address);
 }
 

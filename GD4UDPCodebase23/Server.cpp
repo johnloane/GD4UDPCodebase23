@@ -11,7 +11,7 @@ int main()
 {
 	SocketUtil::StaticInit();
 	UDPSocketPtr server_socket = SocketUtil::CreateUDPSocket(INET);
-	SocketAddress server_address = SocketAddress(Server::ConvertIPToInt("127.0.0.1"), 50005);
+	SocketAddress server_address = SocketAddress(Server::ConvertIPToInt("10.102.215.156"), 50005);
 	server_socket->Bind(server_address);
 	server_socket->SetNonBlockingMode(false);
 	Server::DoServiceLoop(server_socket);
