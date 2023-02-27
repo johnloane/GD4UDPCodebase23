@@ -130,6 +130,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Core\Core\MemoryBitStream.cpp" />
+    <ClCompile Include="..\..\Core\Core\MemoryStream.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="SocketAddress.cpp" />
     <ClCompile Include="SocketAddressFactory.cpp" />
     <ClCompile Include="SocketUtil.cpp" />
@@ -138,6 +141,10 @@
     <ClCompile Include="UDPSocket.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Core\Core\ByteSwap.hpp" />
+    <ClInclude Include="..\..\Core\Core\MemoryBitStream.hpp" />
+    <ClInclude Include="..\..\Core\Core\MemoryStream.hpp" />
+    <ClInclude Include="Player.hpp" />
     <ClInclude Include="SocketAddress.hpp" />
     <ClInclude Include="SocketAddressFactory.hpp" />
     <ClInclude Include="SocketUtil.hpp" />

@@ -9,6 +9,8 @@
 
 int main()
 {
+	Player test = Player();
+	std::cout << sizeof(test) << std::endl;
 	SocketUtil::StaticInit();
 	UDPSocketPtr server_socket = SocketUtil::CreateUDPSocket(INET);
 	SocketAddress server_address = SocketAddress(Server::ConvertIPToInt("10.102.215.156"), 50005);
