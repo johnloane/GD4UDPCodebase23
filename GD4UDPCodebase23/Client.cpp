@@ -21,6 +21,7 @@ int main()
 	Player* john = new Player();
 	//Client::SendPlayerOutputByteStream(client_socket, john);
 	Client::SendPlayerOutputBitStream(client_socket, john);
+	system("pause");
 	return 0;
 }
 
@@ -135,7 +136,6 @@ void Client::SendPlayerOutputBitStream(UDPSocketPtr client_socket, const Player*
 	player->WriteBits(output_bit_stream);
 	int bytes_sent = client_socket->SendTo(output_bit_stream.GetBufferPtr(), output_bit_stream.GetByteLength(), server_address);
 	std::cout << "Sent: " << bytes_sent << std::endl;
-	std::cin.ignore();
 }
 
 void Client::ByteSwapTest()

@@ -124,6 +124,7 @@ public:
 	{
 		size_t elementCount;
 		Read(elementCount);
+		std::cout << sizeof(size_t) << elementCount << std::endl;
 		outVector.resize(elementCount);
 		for (T& element : outVector)
 		{

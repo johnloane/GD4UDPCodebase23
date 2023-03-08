@@ -9,8 +9,6 @@
 
 int main()
 {
-	Player test = Player();
-	std::cout << sizeof(test) << std::endl;
 	SocketUtil::StaticInit();
 	UDPSocketPtr server_socket = SocketUtil::CreateUDPSocket(INET);
 	SocketAddress server_address = SocketAddress(Server::ConvertIPToInt("127.0.0.1"), 50005);
@@ -19,8 +17,6 @@ int main()
 	//Server::DoServiceLoop(server_socket);
 	//Server::ReceivePlayerInputByteStream(server_socket);
 	Server::ReceivePlayerInputBitStream(server_socket);
-	
-	return 0;
 }
 
 uint32_t Server::ConvertIPToInt(std::string ip_string)
@@ -140,7 +136,9 @@ void Server::ReceivePlayerInputBitStream(UDPSocketPtr server_socket)
 
 	char* temporary_buffer = static_cast<char*>(std::malloc(kMaxPacketSize));
 	int bytes_received = server_socket->ReceiveFrom(temporary_buffer, kMaxPacketSize, sender_address);
+	std::cout << "Received " << bytes_received << " bytes from " << sender_address.ToString() << std::endl;
 	InputMemoryBitStream stream(temporary_buffer, static_cast<uint32_t>(bytes_received*8));
+	std::cout << "Created the stream" << std::endl;
 	received_player->ReadBits(stream);
 	std::cout << "Received: " << bytes_received << std::endl;
 	received_player->toString();

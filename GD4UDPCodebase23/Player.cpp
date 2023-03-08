@@ -1,5 +1,4 @@
 #include "SocketWrapperPCH.hpp"
-#include "Player.hpp"
 
 uint32_t Player::GetHealth() const
 {
@@ -52,7 +51,7 @@ void Player::WriteBits(OutputMemoryBitStream& out_stream) const
 	out_stream.WriteBits(m_ammo, 9);
 	uint8_t name_length = static_cast<uint8_t>(strlen(m_name));
 	out_stream.WriteBits(name_length, 8);
-	out_stream.WriteBits(&m_name, (name_length * 8));
+	out_stream.WriteBits(m_name, (name_length * 8));
 	out_stream.Write(m_weapons);
 	out_stream.WritePos(m_position);
 	out_stream.Write(m_rotation);
@@ -61,11 +60,22 @@ void Player::WriteBits(OutputMemoryBitStream& out_stream) const
 void Player::ReadBits(InputMemoryBitStream& in_stream)
 {
 	in_stream.ReadBits(&m_health, 7);
+	std::cout << "Health" << std::endl;
 	in_stream.ReadBits(&m_ammo, 9);
+	std::cout << "Ammo" << std::endl;
 	uint8_t name_length;
-	in_stream.ReadBits(name_length, 8);
+	in_stream.Read(name_length);
+	std::cout << "Name length" << std::endl;
 	in_stream.ReadBits(&m_name, (name_length * 8));
+	std::cout << "Name" << std::endl;
 	in_stream.Read(m_weapons);
+	std::cout << "Weapons" << std::endl;
 	in_stream.ReadPos(m_position);
+	std::cout << "Position" << std::endl;
 	in_stream.Read(m_rotation);
+	std::cout << "Rotation" << std::endl;
 }
+
+
+
+
