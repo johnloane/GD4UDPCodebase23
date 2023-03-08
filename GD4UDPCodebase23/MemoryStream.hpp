@@ -40,6 +40,7 @@ public:
 	void Write(const std::vector< int >& inIntVector)
 	{
 		size_t elementCount = inIntVector.size();
+		std::cout << sizeof(size_t) << elementCount << std::endl;
 		Write(elementCount);
 		Write(inIntVector.data(), elementCount * sizeof(int));
 	}

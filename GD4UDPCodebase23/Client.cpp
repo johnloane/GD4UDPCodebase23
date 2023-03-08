@@ -16,9 +16,11 @@ int main()
 	SocketUtil::StaticInit();
 	UDPSocketPtr client_socket = SocketUtil::CreateUDPSocket(INET);
 	client_socket->SetNonBlockingMode(false);
+	//Client::ByteSwapTest();
 	//Client::DoServiceLoop(client_socket);
 	Player* john = new Player();
-	Client::SendPlayerOutputByteStream(client_socket, john);
+	//Client::SendPlayerOutputByteStream(client_socket, john);
+	Client::SendPlayerOutputBitStream(client_socket, john);
 	return 0;
 }
 
@@ -122,7 +124,25 @@ void Client::SendPlayerOutputByteStream(UDPSocketPtr client_socket, const Player
 	player->Write(output_stream);
 	int bytes_sent = client_socket->SendTo(output_stream.GetBufferPtr(), output_stream.GetLength(), server_address);
 	std::cout << "Sent: " << bytes_sent << std::endl;
+	std::cin.ignore();
 	
+}
+
+void Client::SendPlayerOutputBitStream(UDPSocketPtr client_socket, const Player* player)
+{
+	SocketAddress server_address = SocketAddress(Client::ConvertIPToInt("127.0.0.1"), 50005);
+	OutputMemoryBitStream output_bit_stream;
+	player->WriteBits(output_bit_stream);
+	int bytes_sent = client_socket->SendTo(output_bit_stream.GetBufferPtr(), output_bit_stream.GetByteLength(), server_address);
+	std::cout << "Sent: " << bytes_sent << std::endl;
+	std::cin.ignore();
+}
+
+void Client::ByteSwapTest()
+{
+	uint16_t value = 16;
+	uint16_t swapped_value = ByteSwap(value);
+	std::cout << value << " " << swapped_value << std::endl;
 }
 
 //void Client::ByteSwapTest()

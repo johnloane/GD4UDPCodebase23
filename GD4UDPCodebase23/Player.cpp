@@ -45,3 +45,27 @@ void Player::toString() const
 	}
 	std::cout << std::endl;
 }
+
+void Player::WriteBits(OutputMemoryBitStream& out_stream) const
+{
+	out_stream.WriteBits(m_health, 7);
+	out_stream.WriteBits(m_ammo, 9);
+	uint8_t name_length = static_cast<uint8_t>(strlen(m_name));
+	out_stream.WriteBits(name_length, 8);
+	out_stream.WriteBits(&m_name, (name_length * 8));
+	out_stream.Write(m_weapons);
+	out_stream.WritePos(m_position);
+	out_stream.Write(m_rotation);
+}
+
+void Player::ReadBits(InputMemoryBitStream& in_stream)
+{
+	in_stream.ReadBits(&m_health, 7);
+	in_stream.ReadBits(&m_ammo, 9);
+	uint8_t name_length;
+	in_stream.ReadBits(name_length, 8);
+	in_stream.ReadBits(&m_name, (name_length * 8));
+	in_stream.Read(m_weapons);
+	in_stream.ReadPos(m_position);
+	in_stream.Read(m_rotation);
+}

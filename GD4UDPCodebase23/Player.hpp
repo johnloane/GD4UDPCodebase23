@@ -8,6 +8,8 @@ public:
 	void Write(OutputMemoryStream& out_stream) const;
 	void Read(InputMemoryStream& in_stream);
 	virtual void toString() const;
+	void WriteBits(OutputMemoryBitStream& out_stream) const;
+	void ReadBits(InputMemoryBitStream& in_stream);
 
 private:
 	uint32_t m_health;
