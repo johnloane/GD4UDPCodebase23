@@ -12,6 +12,7 @@ public:
 	static std::string ReturnCurrentDateAndTime();
 	static void ReceivePlayerInputByteStream(UDPSocketPtr server_socket);
 	static void ReceivePlayerInputBitStream(UDPSocketPtr server_socket);
+	static void ReceiveWorld(UDPSocketPtr server_socket, Player* player, LinkingContext* game_context);
 	enum class Choice {
 		ECHO = 1,
 		DATEANDTIME = 2,

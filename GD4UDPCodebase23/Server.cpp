@@ -143,3 +143,28 @@ void Server::ReceivePlayerInputBitStream(UDPSocketPtr server_socket)
 	std::cout << "Received: " << bytes_received << std::endl;
 	received_player->toString();
 }
+
+void Server::ReceiveWorld(UDPSocketPtr server_socket, Player* player, LinkingContext* game_context)
+{
+	SocketAddress sender_address;
+	char* temporary_buffer = static_cast<char*>(std::malloc(kMaxPacketSize));
+	int bytes_received = server_socket->ReceiveFrom(temporary_buffer, kMaxPacketSize, sender_address);
+	std::cout << "Received " << bytes_received << " bytes from " << sender_address.ToString() << std::endl;
+	InputMemoryBitStream stream(temporary_buffer, static_cast<uint32_t>(bytes_received * 8));
+	PacketType receive_packet;
+	stream.ReadBits(&receive_packet, 2);
+	uint32_t network_id;
+	stream.ReadBits(&network_id, 32);
+	if (game_context->GetGameObject(network_id) == nullptr)
+	{
+		std::cout << "Object does not exist. Need to create it " << std::endl;
+		int new_id = game_context->GetNetworkId(player, true);
+		std::cout << "New id is " << new_id << std::endl;
+	}
+	else
+	{
+		std::cout << "Object exists. Just need to copy data into it" << std::endl;
+	}
+	
+	
+}

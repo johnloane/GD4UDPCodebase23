@@ -145,6 +145,22 @@ void Client::ByteSwapTest()
 	std::cout << value << " " << swapped_value << std::endl;
 }
 
+void Client::SendWorld(UDPSocketPtr client_socket, Player* player, LinkingContext game_context)
+{
+	SocketAddress server_address = SocketAddress(Client::ConvertIPToInt("127.0.0.1"), 50005);
+	OutputMemoryBitStream output_bit_stream;
+	//First send the type of packet
+	PacketType or_packet = PacketType::PT_ReplicationData;
+	output_bit_stream.WriteBits(&or_packet, GetRequiredBits<PacketType::PT_MAX>::Value);
+	//Send the id of the player
+	uint32_t player_id = game_context.GetNetworkId(player, true);
+	std::cout << "Id is " << player_id << std::endl;
+	output_bit_stream.Write(player_id);
+	player->WriteBits(output_bit_stream);
+	int bytes_sent = client_socket->SendTo(output_bit_stream.GetBufferPtr(), output_bit_stream.GetByteLength(), server_address);
+	std::cout << "Sent: " << bytesSent << std::endl;
+}
+
 //void Client::ByteSwapTest()
 //{
 //	uint16_t value = 16;

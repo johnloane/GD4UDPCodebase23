@@ -14,6 +14,7 @@ public:
 	static void SendPlayerOutputBitStream(UDPSocketPtr client_socket, const Player* player);
 	static const int32_t kMaxPacketSize = 1300;
 	static void ByteSwapTest();
+	static void SendWorld(UDPSocketPtr client_socket, Player* player, LinkingContext game_context);
 	
 	//static void ByteSwapTest();
 };

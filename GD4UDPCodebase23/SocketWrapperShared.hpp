@@ -61,6 +61,7 @@ using std::unordered_set;
 #include "SocketUtil.hpp"
 #include "Math.hpp"
 #include "ByteSwap.hpp"
+#include "LinkingContext.hpp"
 #include "MemoryStream.hpp"
 #include "MemoryBitStream.hpp"
 #include "Player.hpp"
